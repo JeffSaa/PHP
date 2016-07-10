@@ -1,5 +1,6 @@
 <?php
   include("conInfo.php");
+
   $con = mysqli_connect($host,$user,$pass,$db)or die("Conn error!");
   if($con){
     echo "Successful DB";
@@ -11,5 +12,18 @@
   else {
     echo "Error: " . $sql . "<br>" . $con->error;
   }
+
+  $sql = "SELECT * FROM `users`";
+  $result = $con->query($sql);
+  if ($result->num_rows > 0) {
+
+    echo "<ul>";
+    while($row = $result->fetch_assoc()) {
+      echo "<li>".$row["USER"]."</li>";
+    }
+    echo "</ul>";
+
+  }
+
   $con->close();
 ?>
